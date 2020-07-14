@@ -115,7 +115,7 @@ export default baseMixins.extend<options>().extend({
     computedLeft () {
       const a = this.dimensions.activator
       const c = this.dimensions.content
-      const activatorLeft = (this.attach !== false ? a.offsetLeft : a.left) || 0
+      const activatorLeft = (this.attach !== false ? -a.offsetLeft : a.left) || 0
       const minWidth = Math.max(a.width, c.width)
       let left = 0
       left += this.left ? activatorLeft - (minWidth - a.width) : activatorLeft
@@ -137,7 +137,7 @@ export default baseMixins.extend<options>().extend({
       let top = 0
 
       if (this.top) top += a.height - c.height
-      if (this.attach !== false) top += a.offsetTop
+      if (this.attach !== false) top -= a.offsetTop
       else top += a.top + this.pageYOffset
       if (this.offsetY) top += this.top ? -a.height : a.height
       if (this.nudgeTop) top -= parseInt(this.nudgeTop)
